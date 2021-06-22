@@ -70,7 +70,9 @@
     <link rel="stylesheet" href="{{ asset('backend/assets/css/style.css') }}">
     <!-- End layout styles -->
     <link rel="shortcut icon" href="{{ asset('backend/assets/images/favicon.png') }}" />
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css"
+        integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     {{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
         integrity="undefined" crossorigin="anonymous"> --}}
 
@@ -135,13 +137,13 @@
     </div>
     <!-- container-scroller -->
     <!-- plugins:js -->
+
     <script src="{{ asset('backend/assets/vendors/js/vendor.bundle.base.js') }}"></script>
     <!-- endinject -->
     <!-- Plugin js for this page -->
     <!-- End plugin js for this page -->
     <!-- inject:js -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="undefined"
-        crossorigin="anonymous"></script>
+
     <script src="https://code.jquery.com/jquery-3.6.0.js"
         integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <script src="{{ asset('backend/assets/js/off-canvas.js') }}"></script>
@@ -155,46 +157,48 @@
         integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
-        @if (Session::has('message'))
+        @if(Session::has('message'))
 
-        let type = {{ Session::get('alertType', 'info') }};
-        // toastr.options = {
-        //         "closeButton": true,
-        //         "debug": false,
-        //         "newestOnTop": true,
-        //         "progressBar": true,
-        //         "positionClass": "toast-top-right",
-        //         "preventDuplicates": true,
-        //         "onclick": null,
-        //         "showDuration": "300",
-        //         "hideDuration": "1000",
-        //         "timeOut": "3000",
-        //         "extendedTimeOut": "1000",
-        //         "showEasing": "swing",
-        //         "hideEasing": "linear",
-        //         "showMethod": "fadeIn",
-        //         "hideMethod": "fadeOut"
-        //         }
+        let type = {{ Session::get('alertType') }};
+        toastr.options = {
+                "closeButton": true,
+                "debug": false,
+                "newestOnTop": true,
+                "progressBar": true,
+                "positionClass": "toast-top-right",
+                "preventDuplicates": true,
+                "onclick": null,
+                "showDuration": "300",
+                "hideDuration": "1000",
+                "timeOut": "1000000",
+                "extendedTimeOut": "1000000",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut"
+                }
 
                 switch (type) {
-                case 'info':
-                    toastr.info('{{ Session::get('message') }}')
-                    break;
-                case 'success':
-                toastr.success('{{ Session::get('message') }}')
-                    break;
-                case 'warning':
-                    toastr.warning('{{ Session::get('message') }}')
-                    break;
-                case 'error':
-                    toastr.error('{{ Session::get('message') }}')
-                    break;
-                default:
-                    break;
-            }
+                    case 'info':
+                        toastr.info('{{ Session::get('message') }}')
+                        break;
+                    case 'success':
+                    toastr.success('{{ Session::get('message') }}')
+                        break;
+                    case 'warning':
+                        toastr.warning('{{ Session::get('message') }}')
+                        break;
+                    case 'error':
+                        toastr.error('{{ Session::get('message') }}')
+                        break;
+                    default:
+                        break;
+                }
 
             @endif
     </script>
+
+
 </body>
 
 </html>
