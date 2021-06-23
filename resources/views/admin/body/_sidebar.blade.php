@@ -99,7 +99,7 @@
                 <ul class="nav flex-column sub-menu">
                     <li class="nav-item"> <a class="nav-link" href="{{ route('district') }}"> District
                         </a></li>
-                    <li class="nav-item"> <a class="nav-link" href=""> Sub District </a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('subdistrict') }}"> Sub District </a></li>
                 </ul>
             </div>
         </li>

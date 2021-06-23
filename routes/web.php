@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\DistrictController;
 use App\Http\Controllers\Backend\SubCategoryController;
+use App\Http\Controllers\Backend\SubDistrictController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -47,6 +48,14 @@ Route::post('/district/store', [DistrictController::class, 'storeDistrict'])->na
 Route::get('/district/edit/{id}', [DistrictController::class, 'editDistrict'])->name('district.edit');
 Route::post('/district/update/{id}', [DistrictController::class, 'updateDistrict'])->name('district.update');
 Route::get('/district/delete/{id}', [DistrictController::class, 'deleteDistrict'])->name('district.delete');
+
+// Sub District route
+Route::get('/subdistricts', [SubDistrictController::class, 'index'])->name('subdistrict');
+Route::get('subdistrict/add', [SubDistrictController::class, 'addSubDis'])->name('subdistrict.add');
+Route::post('/subdistrict/store', [SubDistrictController::class, 'storeSubDis'])->name('subdistrict.store');
+Route::get('/subdistrict/edit/{id}', [SubDistrictController::class, 'editSubDis'])->name('subdistrict.edit');
+Route::post('/subdistrict/update/{id}', [SubDistrictController::class, 'updateSubDis'])->name('subdistrict.update');
+Route::get('/subdistrict/delete/{id}', [SubDistrictController::class, 'deleteSubDis'])->name('subdistrict.delete');
 
 // Admin dashboard route
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
