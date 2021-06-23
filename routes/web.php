@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Backend\CategoryController;
+use App\Http\Controllers\Backend\DistrictController;
 use App\Http\Controllers\Backend\SubCategoryController;
 use Illuminate\Support\Facades\Route;
 
@@ -31,7 +32,7 @@ Route::get('/category/edit/{id}', [CategoryController::class, 'editCategory'])->
 Route::post('/category/update/{id}', [CategoryController::class, 'updateCategory'])->name('category.update');
 Route::get('/category/delete/{id}', [CategoryController::class, 'deleteCategory'])->name('category.delete');
 
-// Sub categories
+// Sub categories route
 Route::get('/subcategories', [SubCategoryController::class, 'index'])->name('subcategories');
 Route::get('/subcategories/add', [SubCategoryController::class, 'addSubCate'])->name('subcategory.add');
 Route::post('/subcategories/store', [SubCategoryController::class, 'storeSubCategory'])->name('subcategory.store');
@@ -39,6 +40,13 @@ Route::get('/subcategory/edit/{id}', [SubCategoryController::class, 'editSubCate
 Route::post('/subcategory/update/{id}', [SubCategoryController::class, 'updateSubCategory'])->name('subcategory.update');
 Route::get('/subcategory/delete/{id}', [SubCategoryController::class, 'deleteSubCategory'])->name('subcategory.delete');
 
+// District route
+Route::get('/district', [DistrictController::class, 'index'])->name('district');
+Route::get('/district/add', [DistrictController::class, 'addDistrict'])->name('district.add');
+Route::post('/district/store', [DistrictController::class, 'storeDistrict'])->name('district.store');
+Route::get('/district/edit/{id}', [DistrictController::class, 'editDistrict'])->name('district.edit');
+Route::post('/district/update/{id}', [DistrictController::class, 'updateDistrict'])->name('district.update');
+Route::get('/district/delete/{id}', [DistrictController::class, 'deleteDistrict'])->name('district.delete');
 
 // Admin dashboard route
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
