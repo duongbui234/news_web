@@ -104,6 +104,23 @@
             </div>
         </li>
 
+        <li class="nav-item menu-items">
+            <a class="nav-link" data-toggle="collapse" href="#post" aria-expanded="false" aria-controls="post">
+                <span class="menu-icon">
+                    <i class="mdi mdi-laptop"></i>
+                </span>
+                <span class="menu-title">Posts</span>
+                <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="post">
+                <ul class="nav flex-column sub-menu">
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('post.add') }}"> Add post
+                        </a></li>
+                    <li class="nav-item"> <a class="nav-link" href="">All posts</a></li>
+                </ul>
+            </div>
+        </li>
+
 
         <li class="nav-item menu-items">
             <a class="nav-link" href="pages/tables/basic-table.html">

@@ -5,6 +5,7 @@ use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\DistrictController;
 use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\Backend\SubDistrictController;
+use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -56,6 +57,10 @@ Route::post('/subdistrict/store', [SubDistrictController::class, 'storeSubDis'])
 Route::get('/subdistrict/edit/{id}', [SubDistrictController::class, 'editSubDis'])->name('subdistrict.edit');
 Route::post('/subdistrict/update/{id}', [SubDistrictController::class, 'updateSubDis'])->name('subdistrict.update');
 Route::get('/subdistrict/delete/{id}', [SubDistrictController::class, 'deleteSubDis'])->name('subdistrict.delete');
+
+// Posts route
+
+Route::get('post/add', [PostController::class, 'createPost'])->name('post.add');
 
 // Admin dashboard route
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
