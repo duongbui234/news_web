@@ -5,7 +5,10 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Corona Admin</title>
+    <title>News Admin</title>
+
+    {{-- <meta name="csrf-token" content="{{ csrf_token() }}"> --}}
+
     <!-- plugins:css -->
     <link rel="stylesheet" href="{{ asset('backend/assets/vendors/mdi/css/materialdesignicons.min.css') }}">
     <link rel="stylesheet" href="{{ asset('backend/assets/vendors/css/vendor.bundle.base.css') }}">
@@ -63,6 +66,8 @@
         <!-- page-body-wrapper ends -->
     </div>
     <!-- container-scroller -->
+    <!-- custom js -->
+    <script src="{{ asset('js/custom.js') }}"></script>
     <!-- plugins:js -->
     <script src="{{ asset('backend/assets/vendors/js/vendor.bundle.base.js') }}"></script>
     <!-- endinject -->

@@ -60,7 +60,12 @@ Route::get('/subdistrict/delete/{id}', [SubDistrictController::class, 'deleteSub
 
 // Posts route
 
+Route::get('/post/all', [PostController::class, 'index'])->name('post.all');
 Route::get('post/add', [PostController::class, 'createPost'])->name('post.add');
+Route::get('/get/subcategory/{category_id}', [PostController::class, 'getSubCategory']);
+Route::get('/get/subdistrict/{district_id}', [PostController::class, 'getSubDistrict']);
+Route::post('post/store', [PostController::class, 'storePost'])->name('post.store');
+
 
 // Admin dashboard route
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {

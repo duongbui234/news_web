@@ -116,7 +116,7 @@
                 <ul class="nav flex-column sub-menu">
                     <li class="nav-item"> <a class="nav-link" href="{{ route('post.add') }}"> Add post
                         </a></li>
-                    <li class="nav-item"> <a class="nav-link" href="">All posts</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('post.all') }}">All posts</a></li>
                 </ul>
             </div>
         </li>
