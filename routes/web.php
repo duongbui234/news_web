@@ -71,9 +71,12 @@ Route::post('/post/update/{id}', [PostController::class, 'updatePost'])->name('p
 Route::get('/post/delete/{id}', [PostController::class, 'deletePost'])->name('post.delete');
 
 
-// Social route
-Route::get('/social/all', [SettingController::class, 'index'])->name('social.all');
+// Setting route
+Route::get('/social/all', [SettingController::class, 'social'])->name('social.all');
 Route::post('/social/update/{id}', [SettingController::class, 'updateSocial'])->name('social.update');
+
+Route::get('/seo/all', [SettingController::class, 'seo'])->name('seo.all');
+Route::post('/seo/update/{id}', [SettingController::class, 'updateSeo'])->name('seo.update');
 
 // Admin dashboard route
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {

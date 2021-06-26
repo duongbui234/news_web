@@ -147,12 +147,21 @@
         $('#summernote1').summernote({
         height: 150
     });
-    </script>
-    <script type="text/javascript">
         $('#summernote2').summernote({
         height: 150
     });
+        $('#summernote3').summernote({
+        height: 150
+    });
+        $('#summernote4').summernote({
+        height: 150
+    });
+        $('#summernote5').summernote({
+        height: 150
+    });
     </script>
+
+
 
 </body>
 

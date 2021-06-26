@@ -133,6 +133,8 @@
                 <ul class="nav flex-column sub-menu">
                     <li class="nav-item"> <a class="nav-link" href="{{ route('social.all') }}"> Social setting
                         </a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('seo.all') }}"> Seo setting
+                        </a></li>
                 </ul>
             </div>
         </li>
