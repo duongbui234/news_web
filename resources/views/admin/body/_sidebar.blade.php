@@ -139,6 +139,8 @@
                         </a></li>
                     <li class="nav-item"> <a class="nav-link" href="{{ route('livetv.all') }}"> Live TV setting
                         </a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('notice.all') }}"> Notice settings
+                        </a></li>
                 </ul>
             </div>
         </li>

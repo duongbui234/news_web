@@ -86,6 +86,11 @@ Route::post('/livetv/update/{id}', [SettingController::class, 'updateLivetv'])->
 Route::get('/livetv/active/{id}', [SettingController::class, 'active'])->name('livetv.active');
 Route::get('/livetv/inactive/{id}', [SettingController::class, 'inactive'])->name('livetv.inactive');
 
+Route::get('/notice/all', [SettingController::class, 'notice'])->name('notice.all');
+Route::post('/notice/update/{id}', [SettingController::class, 'updateNotice'])->name('notice.update');
+Route::get('/notice/active/{id}', [SettingController::class, 'activeNotice'])->name('notice.active');
+Route::get('/notice/inactive/{id}', [SettingController::class, 'inactiveNotice'])->name('notice.inactive');
+
 // Admin dashboard route
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('admin.index');

@@ -118,4 +118,40 @@ class SettingController extends Controller
 
         return Redirect()->route('livetv.all')->with($notification);
     }
+    public function notice()
+    {
+        $notice = DB::table('notices')->first();
+        return view('admin.setting.notice', compact('notice'));
+    }
+
+    public function updateNotice($id, Request $req)
+    {
+        DB::table('notices')->where('id', $id)->update(['notice' => $req->notice]);
+        $notification = [
+            'message' => 'Updated successfully',
+            'alertType' => 'success'
+        ];
+
+        return Redirect()->route('notice.all')->with($notification);
+    }
+    public function activeNotice($id)
+    {
+        DB::table('notices')->where('id', $id)->update(['status' => 1]);
+        $notification = [
+            'message' => 'Active successfully',
+            'alertType' => 'success'
+        ];
+
+        return Redirect()->route('notice.all')->with($notification);
+    }
+    public function inactiveNotice($id)
+    {
+        DB::table('notices')->where('id', $id)->update(['status' => 0]);
+        $notification = [
+            'message' => 'Inactive successfully',
+            'alertType' => 'success'
+        ];
+
+        return Redirect()->route('notice.all')->with($notification);
+    }
 }
