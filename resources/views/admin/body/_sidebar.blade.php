@@ -135,6 +135,10 @@
                         </a></li>
                     <li class="nav-item"> <a class="nav-link" href="{{ route('seo.all') }}"> Seo setting
                         </a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('prayer.all') }}"> Prayer setting
+                        </a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('livetv.all') }}"> Live TV setting
+                        </a></li>
                 </ul>
             </div>
         </li>

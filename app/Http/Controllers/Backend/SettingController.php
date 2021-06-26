@@ -31,6 +31,7 @@ class SettingController extends Controller
 
         return Redirect()->route('social.all')->with($notification);
     }
+
     public function seo()
     {
         $seo = DB::table('seos')->first();
@@ -55,5 +56,66 @@ class SettingController extends Controller
         ];
 
         return Redirect()->route('seo.all')->with($notification);
+    }
+    public function prayer()
+    {
+        $prayer = DB::table('prayers')->first();
+        return view('admin.setting.prayer', compact('prayer'));
+    }
+
+    public function updatePrayer($id, Request $req)
+    {
+        $data = [];
+        $data['hanoi'] = $req->hanoi;
+        $data['saigon'] = $req->saigon;
+        $data['danang'] = $req->danang;
+        $data['sonla'] = $req->sonla;
+        $data['haiduong'] = $req->haiduong;
+        $data['thaibinh'] = $req->thaibinh;
+
+        DB::table('prayers')->where('id', $id)->update($data);
+        $notification = [
+            'message' => 'Update successfully',
+            'alertType' => 'success'
+        ];
+
+        return Redirect()->route('prayer.all')->with($notification);
+    }
+
+    public function livetv()
+    {
+        $livetv = DB::table('livetv')->first();
+        return view('admin.setting.livetv', compact('livetv'));
+    }
+
+    public function updateLivetv($id, Request $req)
+    {
+        DB::table('livetv')->where('id', $id)->update(['embed_code' => $req->embed_code]);
+        $notification = [
+            'message' => 'Update successfully',
+            'alertType' => 'success'
+        ];
+
+        return Redirect()->route('livetv.all')->with($notification);
+    }
+    public function active($id)
+    {
+        DB::table('livetv')->where('id', $id)->update(['status' => 1]);
+        $notification = [
+            'message' => 'Active successfully',
+            'alertType' => 'success'
+        ];
+
+        return Redirect()->route('livetv.all')->with($notification);
+    }
+    public function inactive($id)
+    {
+        DB::table('livetv')->where('id', $id)->update(['status' => 0]);
+        $notification = [
+            'message' => 'Inactive successfully',
+            'alertType' => 'success'
+        ];
+
+        return Redirect()->route('livetv.all')->with($notification);
     }
 }

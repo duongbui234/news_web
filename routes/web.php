@@ -78,6 +78,14 @@ Route::post('/social/update/{id}', [SettingController::class, 'updateSocial'])->
 Route::get('/seo/all', [SettingController::class, 'seo'])->name('seo.all');
 Route::post('/seo/update/{id}', [SettingController::class, 'updateSeo'])->name('seo.update');
 
+Route::get('/prayer/all', [SettingController::class, 'prayer'])->name('prayer.all');
+Route::post('/prayer/update/{id}', [SettingController::class, 'updatePrayer'])->name('prayer.update');
+
+Route::get('/livetv/all', [SettingController::class, 'livetv'])->name('livetv.all');
+Route::post('/livetv/update/{id}', [SettingController::class, 'updateLivetv'])->name('livetv.update');
+Route::get('/livetv/active/{id}', [SettingController::class, 'active'])->name('livetv.active');
+Route::get('/livetv/inactive/{id}', [SettingController::class, 'inactive'])->name('livetv.inactive');
+
 // Admin dashboard route
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('admin.index');
