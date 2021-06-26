@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\DistrictController;
+use App\Http\Controllers\Backend\SettingController;
 use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\Backend\SubDistrictController;
 use App\Http\Controllers\PostController;
@@ -69,6 +70,10 @@ Route::get('/post/edit/{id}', [PostController::class, 'editPost'])->name('post.e
 Route::post('/post/update/{id}', [PostController::class, 'updatePost'])->name('post.update');
 Route::get('/post/delete/{id}', [PostController::class, 'deletePost'])->name('post.delete');
 
+
+// Social route
+Route::get('/social/all', [SettingController::class, 'index'])->name('social.all');
+Route::post('/social/update/{id}', [SettingController::class, 'updateSocial'])->name('social.update');
 
 // Admin dashboard route
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {

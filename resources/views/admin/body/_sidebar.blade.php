@@ -121,6 +121,22 @@
             </div>
         </li>
 
+        <li class="nav-item menu-items">
+            <a class="nav-link" data-toggle="collapse" href="#setting" aria-expanded="false" aria-controls="setting">
+                <span class="menu-icon">
+                    <i class="mdi mdi-laptop"></i>
+                </span>
+                <span class="menu-title">Settings</span>
+                <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="setting">
+                <ul class="nav flex-column sub-menu">
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('social.all') }}"> Social setting
+                        </a></li>
+                </ul>
+            </div>
+        </li>
+
 
         <li class="nav-item menu-items">
             <a class="nav-link" href="pages/tables/basic-table.html">
