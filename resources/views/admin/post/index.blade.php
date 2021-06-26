@@ -44,11 +44,10 @@
                                 </td>
                                 <td> {{  Carbon\Carbon::parse($post->post_date)->diffForHumans() }} </td>
                                 <td>
-                                    <a href="" class="btn btn-info">Edit</a>
-                                    <a href="" class="btn btn-danger">Delete</a>
-                                    {{-- <a href="{{ route('post.edit', $post->id) }}" class="btn btn-info">Edit</a>
-                                    <a href="{{ route('post.delete', $post->id) }}" class="btn btn-danger">Delete</a>
-                                    --}}
+                                    <a href="{{ route('post.edit', $post->id) }}" class="btn btn-info">Edit</a>
+                                    <a href="{{ route('post.delete', $post->id) }}" class="btn
+                                    btn-danger">Delete</a>
+
                                 </td>
                             </tr>
 

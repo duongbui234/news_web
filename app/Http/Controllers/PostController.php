@@ -83,4 +83,80 @@ class PostController extends Controller
             return Redirect()->back();
         }
     }
+
+    public function editPost($id)
+    {
+        $post = DB::table('posts')->where('id', $id)->first();
+        $categories = DB::table('categories')->get();
+        $districts = DB::table('districts')->get();
+
+        $subCat = DB::table('subcategories')->where('category_id', $post->category_id)->get();
+        $subDis = DB::table('subdistricts')->where('district_id', $post->district_id)->get();
+
+        return view('admin.post.edit', compact('post', 'categories', 'districts', 'subCat', 'subDis'));
+    }
+
+    public function updatePost(Request $req, $id)
+    {
+        $data = [];
+        $data['title_en'] = $req->title_en;
+        $data['title_vn'] = $req->title_vn;
+        $data['user_id'] = Auth::id();
+        $data['category_id'] = $req->category_id;
+        $data['subcategory_id'] = $req->subcategory_id;
+        $data['district_id'] = $req->district_id;
+        $data['subdistrict_id'] = $req->subdistrict_id;
+        $data['tags_en'] = $req->tags_en;
+        $data['tags_vn'] = $req->tags_vn;
+        $data['details_en'] = $req->details_en;
+        $data['details_vn'] = $req->details_vn;
+        $data['headline'] = $req->headline;
+        $data['first_section'] = $req->first_section;
+        $data['big_thumbnail'] = $req->big_thumbnail;
+        $data['first_section_thumbnail'] = $req->first_section_thumbnail;
+
+        $image = $req->image;
+        $oldImage = $req->image_old;
+
+
+        if ($image) {
+            $upLocation = 'image/post/';
+            $imgName = hexdec(uniqid()) . '.' . $image->getClientOriginalExtension();
+
+            Image::make($image)->resize(500, 300)->save($upLocation . $imgName);
+
+            $data['image'] = $upLocation . $imgName;
+
+            unlink($oldImage);
+
+            DB::table('posts')->where('id', $id)->update($data);
+            $notification = [
+                'message' => 'Updated successfully 🚀🚀🚀',
+                'alertType' => 'success'
+            ];
+            return Redirect()->route('post.all')->with($notification);
+        } else {
+            $data['image'] = $oldImage;
+            DB::table('posts')->where('id', $id)->update($data);
+            $notification = [
+                'message' => 'Updated successfully 🚀🚀🚀',
+                'alertType' => 'success'
+            ];
+            return Redirect()->route('post.all')->with($notification);
+        }
+    }
+
+    public function deletePost($id)
+    {
+        $post  = DB::table('posts')->where('id', $id)->first();
+        unlink($post->image);
+
+        DB::table('posts')->where('id', $id)->delete();
+
+        $notification = [
+            'message' => 'Delete successfully 👌👌👌',
+            'alertType' => 'success'
+        ];
+        return Redirect()->route('post.all')->with($notification);
+    }
 }

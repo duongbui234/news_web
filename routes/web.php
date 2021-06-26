@@ -65,6 +65,9 @@ Route::get('post/add', [PostController::class, 'createPost'])->name('post.add');
 Route::get('/get/subcategory/{category_id}', [PostController::class, 'getSubCategory']);
 Route::get('/get/subdistrict/{district_id}', [PostController::class, 'getSubDistrict']);
 Route::post('post/store', [PostController::class, 'storePost'])->name('post.store');
+Route::get('/post/edit/{id}', [PostController::class, 'editPost'])->name('post.edit');
+Route::post('/post/update/{id}', [PostController::class, 'updatePost'])->name('post.update');
+Route::get('/post/delete/{id}', [PostController::class, 'deletePost'])->name('post.delete');
 
 
 // Admin dashboard route
