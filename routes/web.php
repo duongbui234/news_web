@@ -6,6 +6,7 @@ use App\Http\Controllers\Backend\DistrictController;
 use App\Http\Controllers\Backend\SettingController;
 use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\Backend\SubDistrictController;
+use App\Http\Controllers\Backend\WebsiteController;
 use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 
@@ -90,6 +91,14 @@ Route::get('/notice/all', [SettingController::class, 'notice'])->name('notice.al
 Route::post('/notice/update/{id}', [SettingController::class, 'updateNotice'])->name('notice.update');
 Route::get('/notice/active/{id}', [SettingController::class, 'activeNotice'])->name('notice.active');
 Route::get('/notice/inactive/{id}', [SettingController::class, 'inactiveNotice'])->name('notice.inactive');
+
+// Website route
+Route::get('/website/all', [WebsiteController::class, 'index'])->name('website.all');
+Route::get('/website/add', [WebsiteController::class, 'addWebsite'])->name('website.add');
+Route::post('/website/store', [WebsiteController::class, 'storeWebsite'])->name('website.store');
+Route::get('/website/edit/{id}', [WebsiteController::class, 'editWebsite'])->name('website.edit');
+Route::post('/website/update/{id}', [WebsiteController::class, 'updateWebsite'])->name('website.update');
+Route::get('/website/delete/{id}', [WebsiteController::class, 'deleteWebsite'])->name('website.delete');
 
 // Admin dashboard route
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {

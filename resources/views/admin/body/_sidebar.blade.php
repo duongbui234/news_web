@@ -145,6 +145,23 @@
             </div>
         </li>
 
+        <li class="nav-item menu-items">
+            <a class="nav-link" data-toggle="collapse" href="#website" aria-expanded="false" aria-controls="website">
+                <span class="menu-icon">
+                    <i class="mdi mdi-laptop"></i>
+                </span>
+                <span class="menu-title">Websites</span>
+                <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="website">
+                <ul class="nav flex-column sub-menu">
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('website.add') }}"> Add website
+                        </a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('website.all') }}">All websites</a></li>
+                </ul>
+            </div>
+        </li>
+
 
         <li class="nav-item menu-items">
             <a class="nav-link" href="pages/tables/basic-table.html">
