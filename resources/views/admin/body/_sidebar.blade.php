@@ -162,6 +162,23 @@
             </div>
         </li>
 
+        <li class="nav-item menu-items">
+            <a class="nav-link" data-toggle="collapse" href="#photo" aria-expanded="false" aria-controls="photo">
+                <span class="menu-icon">
+                    <i class="mdi mdi-laptop"></i>
+                </span>
+                <span class="menu-title">Gallery</span>
+                <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="photo">
+                <ul class="nav flex-column sub-menu">
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('photo.all') }}"> Photo gallery
+                        </a></li>
+                    <li class="nav-item"> <a class="nav-link" href="{{ route('video.all') }}">Video gallery</a></li>
+                </ul>
+            </div>
+        </li>
+
 
         <li class="nav-item menu-items">
             <a class="nav-link" href="pages/tables/basic-table.html">

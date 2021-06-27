@@ -3,9 +3,11 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\DistrictController;
+use App\Http\Controllers\Backend\GalleryController;
 use App\Http\Controllers\Backend\SettingController;
 use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\Backend\SubDistrictController;
+use App\Http\Controllers\Backend\VideoController;
 use App\Http\Controllers\Backend\WebsiteController;
 use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
@@ -99,6 +101,16 @@ Route::post('/website/store', [WebsiteController::class, 'storeWebsite'])->name(
 Route::get('/website/edit/{id}', [WebsiteController::class, 'editWebsite'])->name('website.edit');
 Route::post('/website/update/{id}', [WebsiteController::class, 'updateWebsite'])->name('website.update');
 Route::get('/website/delete/{id}', [WebsiteController::class, 'deleteWebsite'])->name('website.delete');
+
+// Photo gallery
+Route::get('/photo/all', [GalleryController::class, 'photoGallery'])->name('photo.all');
+Route::get('/photo/add', [GalleryController::class, 'addPhoto'])->name('photo.add');
+Route::post('/photo/store', [GalleryController::class, 'storePhoto'])->name('photo.store');
+
+// Photo gallery
+Route::get('/video/all', [VideoController::class, 'videoGallery'])->name('video.all');
+Route::get('/video/add', [VideoController::class, 'addVideo'])->name('video.add');
+Route::post('/video/store', [VideoController::class, 'storeVideo'])->name('video.store');
 
 // Admin dashboard route
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
