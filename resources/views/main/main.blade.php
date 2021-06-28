@@ -2,7 +2,10 @@
 
 @section('main')
 
-
+@php
+$firstSectionBig = DB::table('posts')->where('first_section_thumbnail', 1)->orderBy('id', 'desc')->first();
+$firstSection = DB::table('posts')->where('first_section', 1)->orderBy('id', 'desc')->limit(8)->get();
+@endphp
 
 <!-- 1st-news-section-start -->
 <section class="news-section">
@@ -13,73 +16,44 @@
                     <div class="col-md-1 col-sm-1 col-lg-1"></div>
                     <div class="col-md-10 col-sm-10">
                         <div class="lead-news">
-                            <div class="service-img"><a href="#"><img src="assets/img/news.jpg" width="800px"
-                                        alt="Notebook"></a></div>
+                            <div class="service-img"><a href="#"><img src="{{ asset($firstSectionBig->image) }}"
+                                        width="800px" alt="Notebook"></a></div>
                             <div class="content">
-                                <h4 class="lead-heading-01"><a href="#">Modi invited to join March 26 prog in
-                                        person</a> </h4>
+                                <h4 class="lead-heading-01">
+                                    <a href="#">
+                                        @if( session('lang') == 'vietnamese'
+                                        )
+                                        {{ $firstSectionBig->title_vn }}
+                                        @else
+                                        {{ $firstSectionBig->title_en }}
+                                        @endif
+
+                                    </a>
+                                </h4>
                             </div>
                         </div>
                     </div>
 
                 </div>
                 <div class="row">
+                    @foreach ($firstSection as $row)
+
                     <div class="col-md-3 col-sm-3">
                         <div class="top-news">
-                            <a href="#"><img src="assets/img/news.jpg" alt="Notebook"></a>
-                            <h4 class="heading-02"><a href="#">TCB to sell potato at Tk 25 per kg: Minister</a>
+                            <a href="#"><img src="{{ $row->image }}" alt="Notebook"></a>
+                            <h4 class="heading-02"><a href="#">
+                                    @if (session('lang') == 'vietnamese')
+                                    {{ $row->title_vn }}
+                                    @else
+                                    {{ $row->title_en }}
+                                    @endif
+                                </a>
                             </h4>
                         </div>
                     </div>
-                    <div class="col-md-3 col-sm-3">
-                        <div class="top-news">
-                            <a href="#"><img src="assets/img/news.jpg" alt="Notebook"></a>
-                            <h4 class="heading-02"><a href="#">TCB to sell potato at Tk 25 per kg: Minister</a>
-                            </h4>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-3">
-                        <div class="top-news">
-                            <a href="#"><img src="assets/img/news.jpg" alt="Notebook"></a>
-                            <h4 class="heading-02"><a href="#">TCB to sell potato at Tk 25 per kg: Minister</a>
-                            </h4>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-3">
-                        <div class="top-news">
-                            <a href="#"><img src="assets/img/news.jpg" alt="Notebook"></a>
-                            <h4 class="heading-02"><a href="#">Working to provide better future for children: PM</a>
-                            </h4>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-3">
-                        <div class="top-news">
-                            <a href="#"><img src="assets/img/news.jpg" alt="Notebook"></a>
-                            <h4 class="heading-02"><a href="#">Bangladesh sees 14 more deaths, 1274 fresh cases</a>
-                            </h4>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-3">
-                        <div class="top-news">
-                            <a href="#"><img src="assets/img/news.jpg" alt="Notebook"></a>
-                            <h4 class="heading-02"><a href="#">FFs’ monthly honorarium to be raised Tk 20,000</a>
-                            </h4>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-3">
-                        <div class="top-news">
-                            <a href="#"><img src="assets/img/news.jpg" alt="Notebook"></a>
-                            <h4 class="heading-02"><a href="#">Working to provide better future for children: PM</a>
-                            </h4>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-3">
-                        <div class="top-news">
-                            <a href="#"><img src="assets/img/news.jpg" alt="Notebook"></a>
-                            <h4 class="heading-02"><a href="#">Working to provide better future for children: PM</a>
-                            </h4>
-                        </div>
-                    </div>
+
+                    @endforeach
+
                 </div>
 
                 <!-- add-start -->
@@ -90,59 +64,135 @@
                 </div><!-- /.add-close -->
 
                 <!-- news-start -->
+
+
+
                 <div class="row">
+
+                    @php
+                    $firstCategory = DB::table('categories')->first();
+                    $bigThumbnail = DB::table('posts')->where('category_id', $firstCategory->id)->where('big_thumbnail',
+                    1)->orderBy('id', 'desc')->first();
+                    $smallThumbnail = DB::table('posts')->where('category_id',
+                    $firstCategory->id)->where('big_thumbnail',
+                    NULL)->orderBy('id', 'desc')->limit(2)->get();
+                    @endphp
+
                     <div class="col-md-6 col-sm-6">
                         <div class="bg-one">
-                            <div class="cetagory-title"><a href="#">National <span>More <i
-                                            class="fa fa-angle-double-right" aria-hidden="true"></i></span></a>
+                            <div class="cetagory-title">
+                                <a href="#">
+                                    @if (session('lang') == 'vietnamese')
+                                    {{ Str::upper($firstCategory->category_vn) }}
+                                    @else
+                                    {{ Str::upper($firstCategory->category_en) }}
+                                    @endif
+                                    <span>
+                                        @if (session('lang') == 'vietnamese')
+                                        Thêm
+                                        @else
+                                        More
+                                        @endif
+                                        <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                                    </span>
+                                </a>
                             </div>
                             <div class="row">
                                 <div class="col-md-6 col-sm-6">
                                     <div class="top-news">
-                                        <a href="#"><img src="assets/img/news.jpg" alt="Notebook"></a>
-                                        <h4 class="heading-02"><a href="#">Dhaka ranks worst in air quality
-                                                index</a> </h4>
+                                        <a href="#"><img src="{{ asset($bigThumbnail->image) }}" alt="Notebook"></a>
+                                        <h4 class="heading-02">
+                                            <a href="#">
+                                                @if (session('lang') == 'vietnamese')
+                                                {{ $bigThumbnail->title_vn }}
+                                                @else
+                                                {{ $bigThumbnail->title_en }}
+                                                @endif</a>
+                                        </h4>
                                     </div>
                                 </div>
+
                                 <div class="col-md-6 col-sm-6">
+                                    @foreach ($smallThumbnail as $row)
+
                                     <div class="image-title">
-                                        <a href="#"><img src="assets/img/news.jpg" alt="Notebook"></a>
-                                        <h4 class="heading-03"><a href="#">Dhaka ranks worst in air quality
-                                                index</a> </h4>
+                                        <a href="#"><img src="{{ asset($row->image) }}" alt="Notebook"></a>
+                                        <h4 class="heading-03">
+                                            <a href="#">
+                                                @if (session('lang') == 'vietnamese')
+                                                {{ $row->title_vn }}
+                                                @else
+                                                {{ $row->title_en }}
+                                                @endif
+                                            </a>
+                                        </h4>
                                     </div>
-                                    <div class="image-title">
-                                        <a href="#"><img src="assets/img/news.jpg" alt="Notebook"></a>
-                                        <h4 class="heading-03"><a href="#">Dhaka ranks worst in air quality
-                                                index</a> </h4>
-                                    </div>
+
+                                    @endforeach
+
                                 </div>
                             </div>
                         </div>
                     </div>
+
+                    @php
+                    $secondCategory = DB::table('categories')->skip(1)->first();
+
+                    $secondBigThumbnail = DB::table('posts')->where('category_id',
+                    $firstCategory->id)->where('big_thumbnail',
+                    1)->orderBy('id', 'desc')->first();
+
+                    $secondSmallThumbnail = DB::table('posts')->where('category_id',
+                    $secondCategory->id)->where('big_thumbnail',
+                    NULL)->orderBy('id', 'desc')->limit(3)->get();
+
+                    @endphp
+
                     <div class="col-md-6 col-sm-6">
                         <div class="bg-one">
-                            <div class="cetagory-title"><a href="#">Sports<span>More <i class="fa fa-angle-double-right"
-                                            aria-hidden="true"></i></span></a>
+                            <div class="cetagory-title"><a href="#">
+                                    @if (session('lang') == 'vietnamese')
+                                    {{ Str::upper($secondCategory->category_vn) }}
+                                    @else
+                                    {{ Str::upper($secondCategory->category_en) }}
+                                    @endif
+                                    <span>
+                                        @if (session('lang') == 'vietnamese')
+                                        Thêm
+                                        @else
+                                        More
+                                        @endif<i class="fa fa-angle-double-right" aria-hidden="true"></i></span></a>
                             </div>
                             <div class="row">
                                 <div class="col-md-6 col-sm-6">
                                     <div class="top-news">
-                                        <a href="#"><img src="assets/img/news.jpg" alt="Notebook"></a>
-                                        <h4 class="heading-02"><a href="#">Germany claim first Nations League
-                                                win</a> </h4>
+                                        <a href="#"><img src="{{ asset($secondBigThumbnail->image) }}"
+                                                alt="Notebook"></a>
+                                        <h4 class="heading-02"><a href="#">
+                                                @if (session('lang') == 'vietnamese')
+                                                {{ $secondBigThumbnail->title_vn }}
+                                                @else
+                                                {{ $secondBigThumbnail->title_en }}
+                                                @endif</a> </h4>
                                     </div>
                                 </div>
                                 <div class="col-md-6 col-sm-6">
+                                    @foreach ($secondSmallThumbnail as $row)
+
                                     <div class="image-title">
-                                        <a href="#"><img src="assets/img/news.jpg" alt="Notebook"></a>
-                                        <h4 class="heading-03"><a href="#">Germany claim first Nations League
-                                                win</a> </h4>
+                                        <a href="#"><img src="{{ asset($row->image) }}" alt="Notebook"></a>
+                                        <h4 class="heading-03"><a href="#">
+                                                @if (session('lang') == 'vietnamese')
+                                                {{ $row->title_vn }}
+                                                @else
+                                                {{ $row->title_en }}
+                                                @endif
+                                            </a>
+                                        </h4>
                                     </div>
-                                    <div class="image-title">
-                                        <a href="#"><img src="assets/img/news.jpg" alt="Notebook"></a>
-                                        <h4 class="heading-03"><a href="#">Germany claim first Nations League
-                                                win</a> </h4>
-                                    </div>
+
+                                    @endforeach
+
                                 </div>
                             </div>
                         </div>
@@ -195,35 +245,65 @@
 <section class="news-section">
     <div class="container-fluid">
         <div class="row">
+
+            @php
+            $thirdCategory = DB::table('categories')->skip(2)->first();
+
+            $thirdBigThumbnail = DB::table('posts')->where('category_id',
+            $firstCategory->id)->where('big_thumbnail',
+            1)->orderBy('id', 'desc')->first();
+
+            $thirdSmallThumbnail = DB::table('posts')->where('category_id',
+            $thirdCategory->id)->where('big_thumbnail',
+            NULL)->orderBy('id', 'desc')->limit(3)->get();
+
+            @endphp
+
             <div class="col-md-6 col-sm-6">
                 <div class="bg-one">
-                    <div class="cetagory-title-02"><a href="#">International <i class="fa fa-angle-right"
-                                aria-hidden="true"></i> <span><i class="fa fa-plus" aria-hidden="true"></i>All News
-                            </span></a></div>
+                    <div class="cetagory-title-02"><a href="#">
+                            @if (session('lang') == 'vietnamese')
+                            {{ Str::upper($thirdCategory->category_vn) }}
+                            @else
+                            {{ Str::upper($thirdCategory->category_en) }}
+                            @endif
+                            <span>
+                                <span><i class="fa fa-plus" aria-hidden="true"></i>
+                                    @if (session('lang') == 'vietnamese')
+                                    Xem tất cả
+                                    @else
+                                    All news
+                                    @endif
+                                </span></a></div>
                     <div class="row">
                         <div class="col-md-6 col-sm-6">
                             <div class="top-news">
-                                <a href="#"><img src="assets/img/news.jpg" alt="Notebook"></a>
-                                <h4 class="heading-02"><a href="#">Armenia, Azerbaijan accused of breaking truce</a>
+                                <a href="#"><img src="{{ asset($thirdBigThumbnail->image) }}" alt="Notebook"></a>
+                                <h4 class="heading-02"><a href="#">
+                                        @if (session('lang') == 'vietnamese')
+                                        {{ Str::upper($thirdBigThumbnail->title_vn) }}
+                                        @else
+                                        {{ Str::upper($thirdBigThumbnail->title_en) }}
+                                        @endif
+                                    </a>
                                 </h4>
                             </div>
                         </div>
                         <div class="col-md-6 col-sm-6">
+                            @foreach ($thirdSmallThumbnail as $row)
                             <div class="image-title">
-                                <a href="#"><img src="assets/img/news.jpg" alt="Notebook"></a>
-                                <h4 class="heading-03"><a href="#">Armenia, Azerbaijan accused of breaking truce</a>
+                                <a href="#"><img src="{{ asset($row->image) }}" alt="Notebook"></a>
+                                <h4 class="heading-03"><a href="#">
+                                        @if (session('lang') == 'vietnamese')
+                                        {{ Str::upper($row->title_vn) }}
+                                        @else
+                                        {{ Str::upper($row->title_en) }}
+                                        @endif
+                                    </a>
                                 </h4>
                             </div>
-                            <div class="image-title">
-                                <a href="#"><img src="assets/img/news.jpg" alt="Notebook"></a>
-                                <h4 class="heading-03"><a href="#">Armenia, Azerbaijan accused of breaking truce</a>
-                                </h4>
-                            </div>
-                            <div class="image-title">
-                                <a href="#"><img src="assets/img/news.jpg" alt="Notebook"></a>
-                                <h4 class="heading-03"><a href="#">Armenia, Azerbaijan accused of breaking truce</a>
-                                </h4>
-                            </div>
+                            @endforeach
+
                         </div>
                     </div>
                 </div>
@@ -440,84 +520,74 @@
 
             </div>
             <div class="col-md-3 col-sm-3">
+
+                @php
+                $lastest = DB::table('posts')->orderBy('id', 'desc')->limit(8)->get();
+                $earliest = DB::table('posts')->orderBy('id', 'asc')->limit(8)->get();
+                @endphp
+
                 <div class="tab-header">
                     <!-- Nav tabs -->
                     <ul class="nav nav-tabs nav-justified" role="tablist">
-                        <li role="presentation" class="active"><a href="#tab21" aria-controls="tab21" role="tab"
-                                data-toggle="tab" aria-expanded="false">Latest</a></li>
-                        <li role="presentation"><a href="#tab22" aria-controls="tab22" role="tab" data-toggle="tab"
-                                aria-expanded="true">Popular</a></li>
-                        <li role="presentation"><a href="#tab23" aria-controls="tab23" role="tab" data-toggle="tab"
-                                aria-expanded="true">Popular1</a></li>
+                        <li role="presentation" class="active">
+                            <a href="#tab21" aria-controls="tab21" role="tab" data-toggle="tab" aria-expanded="false">
+                                @if (session('lang') == 'vietnamese')
+                                Sớm nhất
+                                @else
+                                Earliest
+                                @endif
+                            </a></li>
+                        <li role="presentation">
+                            <a href="#tab22" aria-controls="tab22" role="tab" data-toggle="tab" aria-expanded="true">
+                                @if(session('lang') == 'vietnamese')
+                                Muộn nhất
+                                @else
+                                Lastest
+                                @endif
+                            </a>
+                        </li>
                     </ul>
 
                     <!-- Tab panes -->
                     <div class="tab-content ">
                         <div role="tabpanel" class="tab-pane in active" id="tab21">
                             <div class="news-titletab">
+
+                                @foreach ($earliest as $row)
                                 <div class="news-title-02">
-                                    <h4 class="heading-03"><a href="#">Both education and life must be saved</a>
+                                    <h4 class="heading-03">
+                                        <a href="#">
+                                            @if (session('lang') == 'vietnamese')
+                                            {{ $row->title_vn }}
+                                            @else
+                                            {{ $row->title_en }}
+                                            @endif
+                                        </a>
                                     </h4>
                                 </div>
-                                <div class="news-title-02">
-                                    <h4 class="heading-03"><a href="#">Both education and life must be saved</a>
-                                    </h4>
-                                </div>
-                                <div class="news-title-02">
-                                    <h4 class="heading-03"><a href="#">Both education and life must be saved</a>
-                                    </h4>
-                                </div>
-                                <div class="news-title-02">
-                                    <h4 class="heading-03"><a href="#">Both education and life must be saved</a>
-                                    </h4>
-                                </div>
-                                <div class="news-title-02">
-                                    <h4 class="heading-03"><a href="#">Both education and life must be saved</a>
-                                    </h4>
-                                </div>
-                                <div class="news-title-02">
-                                    <h4 class="heading-03"><a href="#">Both education and life must be saved</a>
-                                    </h4>
-                                </div>
-                                <div class="news-title-02">
-                                    <h4 class="heading-03"><a href="#">Both education and life must be saved</a>
-                                    </h4>
-                                </div>
+                                @endforeach
+
+
                             </div>
                         </div>
                         <div role="tabpanel" class="tab-pane fade" id="tab22">
                             <div class="news-titletab">
+                                @foreach ($lastest as $row)
                                 <div class="news-title-02">
-                                    <h4 class="heading-03"><a href="#">Both education and life must be saved</a>
+                                    <h4 class="heading-03">
+                                        <a href="#">
+                                            @if (session('lang') == 'vietnamese')
+                                            {{ $row->title_vn }}
+                                            @else
+                                            {{ $row->title_en }}
+                                            @endif
+                                        </a>
                                     </h4>
                                 </div>
-                                <div class="news-title-02">
-                                    <h4 class="heading-03"><a href="#">Both education and life must be saved</a>
-                                    </h4>
-                                </div>
-                                <div class="news-title-02">
-                                    <h4 class="heading-03"><a href="#">Both education and life must be saved</a>
-                                    </h4>
-                                </div>
-                                <div class="news-title-02">
-                                    <h4 class="heading-03"><a href="#">Both education and life must be saved</a>
-                                    </h4>
-                                </div>
-                                <div class="news-title-02">
-                                    <h4 class="heading-03"><a href="#">Both education and life must be saved</a>
-                                    </h4>
-                                </div>
-                                <div class="news-title-02">
-                                    <h4 class="heading-03"><a href="#">Both education and life must be saved</a>
-                                    </h4>
-                                </div>
-                                <div class="news-title-02">
-                                    <h4 class="heading-03"><a href="#">Both education and life must be saved</a>
-                                    </h4>
-                                </div>
+                                @endforeach
                             </div>
                         </div>
-                        <div role="tabpanel" class="tab-pane fade" id="tab23">
+                        {{-- <div role="tabpanel" class="tab-pane fade" id="tab23">
                             <div class="news-titletab">
                                 <div class="news-title-02">
                                     <h4 class="heading-03"><a href="#">Both education and life must be saved</a>
@@ -548,7 +618,7 @@
                                     </h4>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
                 <!-- Namaj Times -->
@@ -591,51 +661,32 @@
             <div class="col-md-8 col-sm-7">
                 <div class="gallery_cetagory-title"> Photo Gallery </div>
 
+                @php
+                $bigPhoto = DB::table('photos')->where('type', 1)->first();
+                $smallPhoto =DB::table('photos')->where('type', 0)->orderBy('id', 'desc')->get();
+                @endphp
+
                 <div class="row">
                     <div class="col-md-8 col-sm-8">
                         <div class="photo_screen">
                             <div class="myPhotos" style="width:100%">
-                                <img src="assets/img/news.jpg" alt="Avatar">
+                                <img src="{{ asset($bigPhoto->photo) }}" alt="Avatar">
                             </div>
                         </div>
                     </div>
                     <div class="col-md-4 col-sm-4">
                         <div class="photo_list_bg">
 
+                            @foreach ($smallPhoto as $row)
+
                             <div class="photo_img photo_border active">
-                                <img src="assets/img/news.jpg" alt="image" onclick="currentDiv(1)">
+                                <img src="{{ asset($row->photo) }}" alt="photo" onclick="currentDiv(1)">
                                 <div class="heading-03">
-                                    Casting of Israeli actress as Cleopatra sparks anger
+                                    {{ $row->title }}
                                 </div>
                             </div>
 
-                            <div class="photo_img photo_border">
-                                <img src="assets/img/news.jpg" alt="image" onclick="currentDiv(1)">
-                                <div class="heading-03">
-                                    Casting of Israeli actress as Cleopatra sparks anger
-                                </div>
-                            </div>
-
-                            <div class="photo_img photo_border">
-                                <img src="assets/img/news.jpg" alt="image" onclick="currentDiv(1)">
-                                <div class="heading-03">
-                                    Casting of Israeli actress as Cleopatra sparks anger
-                                </div>
-                            </div>
-
-                            <div class="photo_img photo_border">
-                                <img src="assets/img/news.jpg" alt="image" onclick="currentDiv(1)">
-                                <div class="heading-03">
-                                    Casting of Israeli actress as Cleopatra sparks anger
-                                </div>
-                            </div>
-
-                            <div class="photo_img photo_border">
-                                <img src="assets/img/news.jpg" alt="image" onclick="currentDiv(1)">
-                                <div class="heading-03">
-                                    Casting of Israeli actress as Cleopatra sparks anger
-                                </div>
-                            </div>
+                            @endforeach
 
                         </div>
                     </div>
@@ -680,7 +731,12 @@
 
             </div>
             <div class="col-md-4 col-sm-5">
-                <div class="gallery_cetagory-title"> photo Gallery </div>
+                <div class="gallery_cetagory-title"> Video Gallery </div>
+
+                @php
+                $bigVideo = DB::table('videos')->where('type', 1)->first();
+                $smallVideo = DB::table('videos')->where('type', 0)->orderBy('id', 'desc')->limit(4)->get();
+                @endphp
 
                 <div class="row">
                     <div class="col-md-12 col-sm-12">
@@ -688,8 +744,7 @@
                             <div class="myVideos" style="width:100%">
                                 <div class="embed-responsive embed-responsive-16by9 embed-responsive-item">
                                     <iframe width="853" height="480"
-                                        src="https://www.youtube.com/embed/AWM8164ksVY?list=RDAWM8164ksVY"
-                                        frameborder="0"
+                                        src="https://www.youtube.com/embed/{{ $bigVideo->embed_code }}" frameborder="0"
                                         allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                                         allowfullscreen></iframe>
                                 </div>
@@ -701,43 +756,23 @@
                 <div class="row">
                     <div class="col-md-12">
 
+
+
                         <div class="gallery_sec owl-carousel">
 
-                            <div class="video_image" style="width:100%" onclick="currentDivs(1)">
-                                <img src="assets/img/news.jpg" alt="Avatar">
-                                <div class="heading-03">
-                                    <div class="content_padding">
-                                        Kumar Sanu tests positive for coronavirus
-                                    </div>
-                                </div>
+                            @foreach ($smallVideo as $row)
+
+
+                            <div class="embed-responsive embed-responsive-16by9 embed-responsive-item">
+                                <iframe width="853" height="480"
+                                    src="https://www.youtube.com/embed/{{ $row->embed_code }}" frameborder="0"
+                                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                                    allowfullscreen></iframe>
                             </div>
 
-                            <div class="video_image" style="width:100%" onclick="currentDivs(1)">
-                                <img src="assets/img/news.jpg" alt="Avatar">
-                                <div class="heading-03">
-                                    <div class="content_padding">
-                                        Kumar Sanu tests positive for coronavirus
-                                    </div>
-                                </div>
-                            </div>
+                            @endforeach
 
-                            <div class="video_image" style="width:100%" onclick="currentDivs(1)">
-                                <img src="assets/img/news.jpg" alt="Avatar">
-                                <div class="heading-03">
-                                    <div class="content_padding">
-                                        Kumar Sanu tests positive for coronavirus
-                                    </div>
-                                </div>
-                            </div>
 
-                            <div class="video_image" style="width:100%" onclick="currentDivs(1)">
-                                <img src="assets/img/news.jpg" alt="Avatar">
-                                <div class="heading-03">
-                                    <div class="content_padding">
-                                        Kumar Sanu tests positive for coronavirus
-                                    </div>
-                                </div>
-                            </div>
 
                         </div>
                     </div>
