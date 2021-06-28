@@ -129,10 +129,18 @@
                             <div class="dropdown">
                                 <button class="dropbtn-02"><i class="fa fa-thumbs-up" aria-hidden="true"></i></button>
                                 <div class="dropdown-content">
-                                    <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i> Facebook</a>
-                                    <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i> Twitter</a>
-                                    <a href="#"><i class="fa fa-youtube-play" aria-hidden="true"></i> Youtube</a>
-                                    <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i> Instagram</a>
+                                    <a href="{{ $social->facebook }}" target="_blank"><i class="fa fa-facebook"
+                                            aria-hidden="true"></i>
+                                        Facebook</a>
+                                    <a href="{{ $social->twitter }}" target="_blank"><i class="fa fa-twitter"
+                                            aria-hidden="true"></i>
+                                        Twitter</a>
+                                    <a href="{{ $social->youtube }}" target="_blank"><i class="fa fa-youtube-play"
+                                            aria-hidden="true"></i>
+                                        Youtube</a>
+                                    <a href="{{ $social->instagram }}" target="_blank"><i class="fa fa-instagram"
+                                            aria-hidden="true"></i>
+                                        Instagram</a>
                                 </div>
                             </div>
                         </li>
@@ -178,11 +186,48 @@
     <div class="container-fluid">
         <div class="row scroll">
             <div class="col-md-2 col-sm-3 scroll_01 ">
+                @if (session('lang') == 'vietnamese')
+                Tin nóng hổi :
+                @else
                 Breaking News :
+                @endif
+
             </div>
             <div class="col-md-10 col-sm-9 scroll_02">
-                <marquee>wellcome to our website...</marquee>
+                <marquee>
+                    @foreach ($posts as $row)
+                    @if (session('lang') == 'vietnamese')
+                    | {{ $row->title_vn }}
+                    @else
+                    | {{ $row->title_en }}
+                    @endif
+                    @endforeach
+                </marquee>
             </div>
         </div>
     </div>
 </section>
+
+@if ($notice->status == 1)
+
+<section>
+    <div class="container-fluid">
+        <div class="row scroll">
+            <div class="col-md-2 col-sm-3 scroll_01 ">
+                @if (session('lang') == 'vietnamese')
+                Thông báo :
+                @else
+                Notice :
+                @endif
+
+            </div>
+            <div class="col-md-10 col-sm-9 scroll_02">
+                <marquee>
+                    {{ $notice->notice }}
+                </marquee>
+            </div>
+        </div>
+    </div>
+</section>
+
+@endif

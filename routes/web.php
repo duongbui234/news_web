@@ -28,7 +28,13 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     $category = DB::table('categories')->orderBy('id', 'asc')->get();
-    return view('main.main', compact('category'));
+    $livetv = DB::table('livetv')->first();
+    $social = DB::table('socials')->first();
+    $seo = DB::table('seos')->first();
+    $websites = DB::table('websites')->get();
+    $posts = DB::table('posts')->where('headline', 1)->limit(3)->get();
+    $notice = DB::table('notices')->first();
+    return view('main.main', compact('category', 'livetv', 'social', 'seo', 'websites', 'posts', 'notice'));
 });
 
 Route::get('/admin/logout', [AdminController::class, 'logout'])->name('admin.logout');
