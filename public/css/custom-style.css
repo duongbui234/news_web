@@ -1,3 +1,6 @@
 .pagination a {
     background-color: white;
 }
+.uc > * {
+    text-transform: uppercase !important;
+}

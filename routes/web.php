@@ -9,7 +9,9 @@ use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\Backend\SubDistrictController;
 use App\Http\Controllers\Backend\VideoController;
 use App\Http\Controllers\Backend\WebsiteController;
+use App\Http\Controllers\Frontend\MultilangController;
 use App\Http\Controllers\PostController;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,7 +27,8 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', function () {
-    return view('welcome');
+    $category = DB::table('categories')->orderBy('id', 'asc')->get();
+    return view('main.main', compact('category'));
 });
 
 Route::get('/admin/logout', [AdminController::class, 'logout'])->name('admin.logout');
@@ -116,3 +119,7 @@ Route::post('/video/store', [VideoController::class, 'storeVideo'])->name('video
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('admin.index');
 })->name('dashboard');
+
+// Frontend multi language
+Route::get('/lang/english', [MultilangController::class, 'toEng'])->name('lang.english');
+Route::get('/lang/vietnamese', [MultilangController::class, 'toVn'])->name('lang.vietnamese');
