@@ -194,7 +194,7 @@
                                 @foreach ($earliest as $row)
                                 <div class="news-title-02">
                                     <h4 class="heading-03">
-                                        <a href="#">
+                                        <a href="{{ URL::to('view/post/'.$row->id) }}">
                                             @if (session('lang') == 'vietnamese')
                                             {{ $row->title_vn }}
                                             @else
@@ -213,7 +213,7 @@
                                 @foreach ($lastest as $row)
                                 <div class="news-title-02">
                                     <h4 class="heading-03">
-                                        <a href="#">
+                                        <a href="{{ URL::to('view/post/'.$row->id) }}">
                                             @if (session('lang') == 'vietnamese')
                                             {{ $row->title_vn }}
                                             @else

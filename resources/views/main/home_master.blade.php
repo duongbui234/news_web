@@ -25,6 +25,7 @@ $seo = DB::table('seos')->first();
     <link href="{{ asset('frontend/assets/style.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/custom-style.css') }}">
 
+
 </head>
 
 <body>
@@ -40,6 +41,7 @@ $seo = DB::table('seos')->first();
     <script src="{{ asset('frontend/assets/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('frontend/assets/js/main.js') }}"></script>
     <script src="{{ asset('frontend/assets/js/owl.carousel.min.js') }}"></script>
+    <script src="{{ asset('frontend/assets/js/custom.js') }}"></script>
 </body>
 
 </html>

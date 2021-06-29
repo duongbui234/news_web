@@ -35,13 +35,13 @@ $notice = DB::table('notices')->first();
                             <!-- Collection of nav links and other content for toggling -->
                             <div id="navbarCollapse" class="collapse navbar-collapse">
                                 <ul class="nav navbar-nav">
-                                    <li><a href="#">HOME</a></li>
+                                    <li><a href="/">HOME</a></li>
 
 
                                     @foreach ($category as $row)
 
                                     <li class="dropdown uc">
-                                        <a href="#" class="dropdown-toggle uc" data-toggle="dropdown">
+                                        <a href="{{ URL::to('/category/'.$row->id.'/'.$row->category_en) }}" class="uc">
                                             @if (session('lang') == 'vietnamese')
                                             {{ $row->category_vn }}
                                             @else
@@ -59,7 +59,8 @@ $notice = DB::table('notices')->first();
                                             @foreach ($subcategory as $row)
 
                                             <li>
-                                                <a href="#">
+                                                <a
+                                                    href="{{ URL::to('/subcategory/'.$row->id.'/'.$row->subcategory_en) }}">
                                                     @if (session('lang') == 'vietnamese')
                                                     {{ $row->subcategory_vn }}
                                                     @else

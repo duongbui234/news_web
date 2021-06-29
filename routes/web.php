@@ -9,8 +9,11 @@ use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\Backend\SubDistrictController;
 use App\Http\Controllers\Backend\VideoController;
 use App\Http\Controllers\Backend\WebsiteController;
+use App\Http\Controllers\Frontend\CategoryController as FrontendCategoryController;
 use App\Http\Controllers\Frontend\MultilangController;
+use App\Http\Controllers\Frontend\SearchByDistrictController;
 use App\Http\Controllers\Frontend\SinglePostController;
+use App\Http\Controllers\Frontend\SubCategoryController as FrontendSubCategoryController;
 use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
@@ -28,7 +31,7 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', function () {
-    
+
     return view('main.main');
 });
 
@@ -70,8 +73,10 @@ Route::get('/subdistrict/delete/{id}', [SubDistrictController::class, 'deleteSub
 
 Route::get('/post/all', [PostController::class, 'index'])->name('post.all');
 Route::get('post/add', [PostController::class, 'createPost'])->name('post.add');
+
 Route::get('/get/subcategory/{category_id}', [PostController::class, 'getSubCategory']);
 Route::get('/get/subdistrict/{district_id}', [PostController::class, 'getSubDistrict']);
+
 Route::post('post/store', [PostController::class, 'storePost'])->name('post.store');
 Route::get('/post/edit/{id}', [PostController::class, 'editPost'])->name('post.edit');
 Route::post('/post/update/{id}', [PostController::class, 'updatePost'])->name('post.update');
@@ -127,3 +132,10 @@ Route::get('/lang/vietnamese', [MultilangController::class, 'toVn'])->name('lang
 
 // Single post
 Route::get('/view/post/{id}', [SinglePostController::class, 'index']);
+
+// Category and Subcategory page
+Route::get('/category/{id}/{category_en}', [FrontendCategoryController::class, 'index']);
+Route::get('/subcategory/{id}/{subcategory_en}', [FrontendSubCategoryController::class, 'index']);
+
+// Search by District
+Route::get('district/search', [SearchByDistrictController::class, 'searchBy'])->name('district.searchBy');

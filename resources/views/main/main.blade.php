@@ -62,7 +62,7 @@ $websites = DB::table('websites')->get();
                 <!-- add-start -->
                 <div class="row">
                     <div class="col-md-12 col-sm-12">
-                        <div class="add"><img src="assets/img/top-ad.jpg" alt="" /></div>
+                        <div class="add"><img src="{{ asset('frontend/assets/img/top-ad.jpg') }}" alt="" /></div>
                     </div>
                 </div><!-- /.add-close -->
 
@@ -206,7 +206,8 @@ $websites = DB::table('websites')->get();
                 <!-- add-start -->
                 <div class="row">
                     <div class="col-md-12 col-sm-12">
-                        <div class="sidebar-add"><img src="assets/img/add_01.jpg" alt="" /></div>
+                        <div class="sidebar-add"><img src="{{ asset('frontend/assets/img/add_01.jpg') }}" alt="" />
+                        </div>
                     </div>
                 </div><!-- /.add-close -->
 
@@ -235,7 +236,7 @@ $websites = DB::table('websites')->get();
                 <div class="row">
                     <div class="col-md-12 col-sm-12">
                         <div class="sidebar-add">
-                            <img src="assets/img/add_01.jpg" alt="" />
+                            <img src="{{ asset('frontend/assets/img/add_01.jpg') }}" alt="" />
                         </div>
                     </div>
                 </div><!-- /.add-close -->
@@ -417,10 +418,10 @@ $websites = DB::table('websites')->get();
         <!-- add-start -->
         <div class="row">
             <div class="col-md-6 col-sm-6">
-                <div class="add"><img src="assets/img/top-ad.jpg" alt="" /></div>
+                <div class="add"><img src="{{ asset('frontend/assets/img/top-ad.jpg') }}" alt="" /></div>
             </div>
             <div class="col-md-6 col-sm-6">
-                <div class="add"><img src="assets/img/top-ad.jpg" alt="" /></div>
+                <div class="add"><img src="{{ asset('frontend/assets/img/top-ad.jpg') }}" alt="" /></div>
             </div>
         </div><!-- /.add-close -->
 
@@ -513,9 +514,49 @@ $websites = DB::table('websites')->get();
                 </div>
 
                 <div class="row">
+                    <div class="cetagory-title-02">
+                        <a href="#">
+                            Search by District
+                            <i class="fa fa-angle-right" aria-hidden="true">
+                            </i>
+
+                        </a>
+                    </div>
+
+                    @php
+                    $districts = DB::table('districts')->get()
+                    @endphp
+
+                    <form method="GET" action="{{ route('district.searchBy') }}" >
+                        @csrf
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <select class="form-control" id="district_id" name="district_id">
+                                    <option>--Select District--</option>
+
+                                    @foreach ($districts as $row)
+                                    <option value="{{ $row->id }}">{{ $row->district_en }} | {{ $row->district_vn }}
+                                    </option>
+                                    @endforeach
+
+                                </select>
+                            </div>
+                            <div class="col-lg-4">
+                                <select class="form-control" id="subdistrict_id" name="subdistrict_id">
+                                    <option>--Select SubDistrict--</option>
+                                </select>
+                            </div>
+                            <div class="col-lg-4">
+                                <button class="btn btn-success btn-block">Search</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="row">
                     <div class="col-md-12 col-sm-12">
                         <div class="sidebar-add">
-                            <img src="assets/img/top-ad.jpg" alt="" />
+                            <img src="{{ asset('frontend/assets/img/top-ad.jpg') }}" alt="" />
                         </div>
                     </div>
                 </div><!-- /.add-close -->
@@ -559,7 +600,7 @@ $websites = DB::table('websites')->get();
                                 @foreach ($earliest as $row)
                                 <div class="news-title-02">
                                     <h4 class="heading-03">
-                                        <a href="#">
+                                        <a href="{{ URL::to('view/post/'.$row->id) }}">
                                             @if (session('lang') == 'vietnamese')
                                             {{ $row->title_vn }}
                                             @else
@@ -578,7 +619,7 @@ $websites = DB::table('websites')->get();
                                 @foreach ($lastest as $row)
                                 <div class="news-title-02">
                                     <h4 class="heading-03">
-                                        <a href="#">
+                                        <a href="{{ URL::to('view/post/'.$row->id) }}">
                                             @if (session('lang') == 'vietnamese')
                                             {{ $row->title_vn }}
                                             @else
@@ -590,38 +631,6 @@ $websites = DB::table('websites')->get();
                                 @endforeach
                             </div>
                         </div>
-                        {{-- <div role="tabpanel" class="tab-pane fade" id="tab23">
-                            <div class="news-titletab">
-                                <div class="news-title-02">
-                                    <h4 class="heading-03"><a href="#">Both education and life must be saved</a>
-                                    </h4>
-                                </div>
-                                <div class="news-title-02">
-                                    <h4 class="heading-03"><a href="#">Both education and life must be saved</a>
-                                    </h4>
-                                </div>
-                                <div class="news-title-02">
-                                    <h4 class="heading-03"><a href="#">Both education and life must be saved</a>
-                                    </h4>
-                                </div>
-                                <div class="news-title-02">
-                                    <h4 class="heading-03"><a href="#">Both education and life must be saved</a>
-                                    </h4>
-                                </div>
-                                <div class="news-title-02">
-                                    <h4 class="heading-03"><a href="#">Both education and life must be saved</a>
-                                    </h4>
-                                </div>
-                                <div class="news-title-02">
-                                    <h4 class="heading-03"><a href="#">Both education and life must be saved</a>
-                                    </h4>
-                                </div>
-                                <div class="news-title-02">
-                                    <h4 class="heading-03"><a href="#">Both education and life must be saved</a>
-                                    </h4>
-                                </div>
-                            </div>
-                        </div> --}}
                     </div>
                 </div>
                 <!-- Namaj Times -->
