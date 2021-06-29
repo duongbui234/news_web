@@ -10,6 +10,7 @@ use App\Http\Controllers\Backend\SubDistrictController;
 use App\Http\Controllers\Backend\VideoController;
 use App\Http\Controllers\Backend\WebsiteController;
 use App\Http\Controllers\Frontend\MultilangController;
+use App\Http\Controllers\Frontend\SinglePostController;
 use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
@@ -27,14 +28,8 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', function () {
-    $category = DB::table('categories')->orderBy('id', 'asc')->get();
-    $livetv = DB::table('livetv')->first();
-    $social = DB::table('socials')->first();
-    $seo = DB::table('seos')->first();
-    $websites = DB::table('websites')->get();
-    $posts = DB::table('posts')->where('headline', 1)->limit(3)->get();
-    $notice = DB::table('notices')->first();
-    return view('main.main', compact('category', 'livetv', 'social', 'seo', 'websites', 'posts', 'notice'));
+    
+    return view('main.main');
 });
 
 Route::get('/admin/logout', [AdminController::class, 'logout'])->name('admin.logout');
@@ -129,3 +124,6 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 // Frontend multi language
 Route::get('/lang/english', [MultilangController::class, 'toEng'])->name('lang.english');
 Route::get('/lang/vietnamese', [MultilangController::class, 'toVn'])->name('lang.vietnamese');
+
+// Single post
+Route::get('/view/post/{id}', [SinglePostController::class, 'index']);

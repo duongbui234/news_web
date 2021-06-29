@@ -1,3 +1,14 @@
+@php
+$category = DB::table('categories')->orderBy('id', 'asc')->get();
+$social = DB::table('socials')->first();
+$posts = DB::table('posts')->where('headline', 1)->limit(3)->get();
+$notice = DB::table('notices')->first();
+
+
+
+@endphp
+
+
 <!-- header-start -->
 <section class="hdr_section">
     <div class="container-fluid">

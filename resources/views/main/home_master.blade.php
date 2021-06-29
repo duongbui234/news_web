@@ -1,3 +1,8 @@
+@php
+$seo = DB::table('seos')->first();
+@endphp
+
+
 <!DOCTYPE html>
 <html lang="en">
 

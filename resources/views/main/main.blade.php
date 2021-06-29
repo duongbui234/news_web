@@ -5,6 +5,9 @@
 @php
 $firstSectionBig = DB::table('posts')->where('first_section_thumbnail', 1)->orderBy('id', 'desc')->first();
 $firstSection = DB::table('posts')->where('first_section', 1)->orderBy('id', 'desc')->limit(8)->get();
+
+$livetv = DB::table('livetv')->first();
+$websites = DB::table('websites')->get();
 @endphp
 
 <!-- 1st-news-section-start -->
@@ -20,7 +23,7 @@ $firstSection = DB::table('posts')->where('first_section', 1)->orderBy('id', 'de
                                         width="800px" alt="Notebook"></a></div>
                             <div class="content">
                                 <h4 class="lead-heading-01">
-                                    <a href="#">
+                                    <a href="{{ URL::to('view/post/'.$firstSectionBig->id) }}" target="_blank">
                                         @if( session('lang') == 'vietnamese'
                                         )
                                         {{ $firstSectionBig->title_vn }}
