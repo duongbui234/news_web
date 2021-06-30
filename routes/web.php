@@ -5,6 +5,7 @@ use App\Http\Controllers\Backend\AdsController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\DistrictController;
 use App\Http\Controllers\Backend\GalleryController;
+use App\Http\Controllers\Backend\RoleController;
 use App\Http\Controllers\Backend\SettingController;
 use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\Backend\SubDistrictController;
@@ -126,6 +127,11 @@ Route::post('/video/store', [VideoController::class, 'storeVideo'])->name('video
 Route::get('/ads/all', [AdsController::class, 'index'])->name('ads.all');
 Route::get('/ads/add', [AdsController::class, 'addAds'])->name('ads.add');
 Route::post('ads/store', [AdsController::class, 'storeAds'])->name('ads.store');
+
+// User role
+Route::get('/write/add', [RoleController::class, 'addWriter'])->name('writer.add');
+Route::post('/writer/store', [RoleController::class, 'storeWriter'])->name('writer.store');
+Route::get('/writer/all', [RoleController::class, 'index'])->name('writer.all');
 
 // Admin dashboard route
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {

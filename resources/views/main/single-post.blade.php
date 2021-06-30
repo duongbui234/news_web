@@ -56,7 +56,7 @@
                             </ul>
 
                         </div>
-                        <div class="col-md-6 col-sm-6 pull-right">
+                        <div class="col-md-6 col-sm-6" style="display: flex; justify-content: flex-end;">
                             <div class="sharethis-inline-share-buttons"></div>
                         </div>
                     </div>

@@ -25,7 +25,7 @@ $seo = DB::table('seos')->first();
     <link href="{{ asset('frontend/assets/style.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/custom-style.css') }}">
     <script type="text/javascript"
-        src="https://platform-api.sharethis.com/js/sharethis.js#property=60dc296d2b1ad10012445e69&product=inline-share-buttons"
+        src="https://platform-api.sharethis.com/js/sharethis.js#property=60dc87a3315d7b0012983501&product=inline-share-buttons"
         async="async"></script>
 
 </head>
