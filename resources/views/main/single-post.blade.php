@@ -57,7 +57,7 @@
 
                         </div>
                         <div class="col-md-6 col-sm-6 pull-right">
-
+                            <div class="sharethis-inline-share-buttons"></div>
                         </div>
                     </div>
                 </div>
@@ -236,8 +236,17 @@
                 </div><!-- /.add-close -->
             </div>
         </div>
+        <div class="row">
+            <div id="fb-root"></div>
+            <script async defer crossorigin="anonymous"
+                src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v11.0" nonce="zFmc6jLr"></script>
+            <div class="fb-comments" data-href="{{ Request::url() }}" data-width="" data-numposts="5">
+            </div>
+        </div>
     </div>
 </section>
+
+
 
 
 @endsection

@@ -164,11 +164,15 @@ $notice = DB::table('notices')->first();
 </section><!-- /.header-close -->
 
 <!-- top-add-start -->
+@php
+$hor = DB::table('ads')->where('type',1)->first()
+@endphp
 <section>
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2">
-                <div class="top-add"><img src="{{ asset('frontend/assets/img/top-ad.jpg') }}" alt="" /></div>
+                <div class="top-add"><a href="{{ $hor->link }}" target="_blank"><img src="{{ asset($hor->ads) }}"
+                            alt="" /></a></div>
             </div>
         </div>
     </div>

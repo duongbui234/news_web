@@ -59,12 +59,23 @@ $websites = DB::table('websites')->get();
 
                 </div>
 
+                @php
+                $hor1 = DB::table('ads')->where('type',1)->skip(1)->first()
+                @endphp
+
                 <!-- add-start -->
+                @if ($hor1 == null)
+
+                @else
                 <div class="row">
                     <div class="col-md-12 col-sm-12">
-                        <div class="add"><img src="{{ asset('frontend/assets/img/top-ad.jpg') }}" alt="" /></div>
+                        <div class="add"><a href="{{ $hor1->link }}" target="_blank"><img src="{{ asset($hor1->ads) }}"
+                                    alt="" /></a>
+                        </div>
                     </div>
-                </div><!-- /.add-close -->
+                </div>
+                @endif
+                <!-- /.add-close -->
 
                 <!-- news-start -->
 
@@ -203,10 +214,14 @@ $websites = DB::table('websites')->get();
                 </div>
             </div>
             <div class="col-md-3 col-sm-3">
+                @php
+                $ver1 = DB::table('ads')->where('type', 0)->first();
+                @endphp
                 <!-- add-start -->
                 <div class="row">
                     <div class="col-md-12 col-sm-12">
-                        <div class="sidebar-add"><img src="{{ asset('frontend/assets/img/add_01.jpg') }}" alt="" />
+                        <div class="sidebar-add"><a href="{{ $ver1->link }}"><img src="{{ asset($ver1->ads) }}"
+                                    alt="" /></a>
                         </div>
                     </div>
                 </div><!-- /.add-close -->
@@ -228,15 +243,29 @@ $websites = DB::table('websites')->get();
 
                 <!-- facebook-page-start -->
                 <div class="cetagory-title-03">Facebook </div>
-                <div class="fb-root">
-                    facebook page here
-                </div><!-- /.facebook-page-close -->
+                <div id="fb-root"></div>
+                <script async defer crossorigin="anonymous"
+                    src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v11.0" nonce="rWaUSan5"></script>
+                <div class="fb-page" data-href="https://www.facebook.com/MixiGaming" data-tabs="timeline" data-width=""
+                    data-height="400" data-small-header="false" data-adapt-container-width="true"
+                    data-hide-cover="false" data-show-facepile="true">
+                    <blockquote cite="https://www.facebook.com/MixiGaming" class="fb-xfbml-parse-ignore"><a
+                            href="https://www.facebook.com/MixiGaming">MixiGaming</a></blockquote>
+                </div>
+                <!-- /.facebook-page-close -->
+
+
+                @php
+                $ver2 = DB::table('ads')->where('type', 0)->skip(1)->first();
+                @endphp
 
                 <!-- add-start -->
                 <div class="row">
                     <div class="col-md-12 col-sm-12">
                         <div class="sidebar-add">
-                            <img src="{{ asset('frontend/assets/img/add_01.jpg') }}" alt="" />
+                            <a href="{{ $ver2->link }}">
+                                <img src="{{ asset($ver2->ads) }}" alt="" />
+                            </a>
                         </div>
                     </div>
                 </div><!-- /.add-close -->
@@ -527,7 +556,7 @@ $websites = DB::table('websites')->get();
                     $districts = DB::table('districts')->get()
                     @endphp
 
-                    <form method="GET" action="{{ route('district.searchBy') }}" >
+                    <form method="GET" action="{{ route('district.searchBy') }}">
                         @csrf
                         <div class="row">
                             <div class="col-lg-4">

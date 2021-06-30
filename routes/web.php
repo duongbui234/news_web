@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Backend\AdsController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\DistrictController;
 use App\Http\Controllers\Backend\GalleryController;
@@ -120,6 +121,11 @@ Route::post('/photo/store', [GalleryController::class, 'storePhoto'])->name('pho
 Route::get('/video/all', [VideoController::class, 'videoGallery'])->name('video.all');
 Route::get('/video/add', [VideoController::class, 'addVideo'])->name('video.add');
 Route::post('/video/store', [VideoController::class, 'storeVideo'])->name('video.store');
+
+// Advertisement
+Route::get('/ads/all', [AdsController::class, 'index'])->name('ads.all');
+Route::get('/ads/add', [AdsController::class, 'addAds'])->name('ads.add');
+Route::post('ads/store', [AdsController::class, 'storeAds'])->name('ads.store');
 
 // Admin dashboard route
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
